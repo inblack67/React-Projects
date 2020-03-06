@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import Navbar from './components/dumb/Navbar';
 import Users from './components/smart/Users';
+import User from './components/smart/User';
 import Search from './components/smart/Search';
 import About from './components/dumb/About';
 import axios from 'axios';
@@ -16,7 +17,9 @@ class App extends Component {
 
   state = {
     loading: false,
-    users: []
+    users: [],
+    user: {},
+    repos: []
   }
 
   async componentDidMount()
@@ -44,9 +47,29 @@ class App extends Component {
     this.setState({ loading: false, users: [] });
   }
 
+
+  // GET a single user
+  getSingleUser = async (username) => {
+
+    this.setState({ loading: true });
+
+    const res = await axios(`https://api.github.com/users/${username}?cliient_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+
+    this.setState({ user: res.data, loading: false });
+  }
+
+  getRepos = async (username) => {
+
+    this.setState({ loading: true });
+
+    const res = await axios(`https://api.github.com/users/${username}/repos?per_page=5&cliient_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+
+    this.setState({ repos: res.data, loading: false });
+  }
+
   render()
   {
-    const { loading, users } = this.state;
+    const { loading, users, user, repos } = this.state;
 
     return (
       <Router>
@@ -64,6 +87,9 @@ class App extends Component {
           )}/>
 
           <Route exact path="/about" render={About}/>
+          <Route exact path="/user/:login" render={props => (
+            <User {...props} getSingleUser={this.getSingleUser} getRepos={this.getRepos} loading={loading} user={user} repos={repos}/>
+          )}/>
 
         </Switch>
 
