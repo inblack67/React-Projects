@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 const UserItem = ( { user: { avatar_url, html_url, login } } ) => {
 
     return (
-      <div className="container">
-        <div className="card">
+      <div className="col s6">
+        <div className="container">
+         <div className="card">
           <div className="card-image">
             <img src={avatar_url} alt="" style={{width: '100px'}}/>
           </div>
@@ -16,6 +17,7 @@ const UserItem = ( { user: { avatar_url, html_url, login } } ) => {
             </a>
           </div>
         </div>
+      </div>
       </div>
     )
 }

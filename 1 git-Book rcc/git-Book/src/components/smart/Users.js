@@ -1,41 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserItem from './UserItem';
+import Preloader from '../dumb/Preloader';
+import PropTypes from 'prop-types'
 
-export default class Users extends Component {
 
-  state = { users: [
+const Users = ({ users,loading }) => {
+
+    if(loading)
     {
-    id: 1,
-    login: 'inblack67',
-    avatar_url: 'https://avatars1.githubusercontent.com/u/52538520?v=4',
-    html_url: 'https://github.com/inblack67'
-    },
-    {
-      id: 2,
-    login: 'inblack67',
-    avatar_url: 'https://avatars1.githubusercontent.com/u/52538520?v=4',
-    html_url: 'https://github.com/inblack67'
-    },
-    {
-      id: 3,
-    login: 'inblack67',
-    avatar_url: 'https://avatars1.githubusercontent.com/u/52538520?v=4',
-    html_url: 'https://github.com/inblack67'
+      return <Preloader />
     }
-  ]
+
+    else
+    {
+      return (
+        <div className="row">
+          {users.map(user => (
+            <UserItem user={user} key={user.id}/>
+          ))}
+        </div>
+      )
+    }
 }
 
-  render() {
-
-
-    const { users } = this.state;
-
-    return (
-      <div>
-        {users.map(user => (
-          <UserItem user={user} key={user.id}/>
-        ))}
-      </div>
-    )
-  }
+Users.propTypes = {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
+
+
+export default Users;
