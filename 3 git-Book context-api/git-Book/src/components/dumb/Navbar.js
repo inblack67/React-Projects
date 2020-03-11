@@ -6,15 +6,19 @@ const Navbar = ({ title }) => {
 
     return (
       <nav>
-        <div className="nav-wrapper">
-          <Link to="/" className="brand-logo">
-            <i className="fa fa-github"></i>
-            {title}
-          </Link>
+        <div className="navbar-fixed">
+        <div className="nav-wrapper blue darken-2">
+
+        <a className="brand-logo social github" href="/">
+          <i className="fa fa-github material-icons large"></i> 
+          {title}
+          </a>
+
           <ul className="right">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
           </ul>
+        </div>
         </div>
       </nav>
     )

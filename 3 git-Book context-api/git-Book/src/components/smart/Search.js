@@ -37,17 +37,21 @@ const Search = ({ showClear }) => {
     return (
 
       <form onSubmit={onSubmit}>
+
         <div className="input-field">
           <input type="text" name="text" value={text} onChange={onChange}/>
           <label htmlFor="Search">Search</label>
         </div>
+
         <div className="input-field">
-          <input type="submit" value="Search" className="btn red"/>
+          <input type="submit" value="Search" className="btn green"/>
+
+          { users.length > 0 && 
+          <input type="submit" value="Clear" className="btn red secondary-content" onClick={clearUsers}/>
+       }
+
         </div>
 
-        { users.length > 0 && <div className="input-field secondary-content">
-          <input type="submit" value="Clear" className="btn black" onClick={clearUsers}/>
-        </div> }
 
       </form>
     )

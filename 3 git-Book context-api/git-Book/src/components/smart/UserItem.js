@@ -10,10 +10,10 @@ const UserItem = ( { user: { avatar_url, html_url, login } } ) => {
         <div className="container">
          <div className="card">
           <div className="card-image">
-            <img src={avatar_url} alt="" style={{width: '100px'}}/>
+            <img src={avatar_url} alt="" className="responsive-img"/>
           </div>
-          <div className="card-content">
-            <Link to={`/user/${login}`} className="btn green">
+          <div className="card-content center">
+            <Link to={`/user/${login}`} className="btn black">
               Explore
             </Link>
           </div>

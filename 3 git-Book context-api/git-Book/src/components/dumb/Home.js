@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Search from '../smart/Search';
 import Users from '../smart/Users';
 
 const Home = () => {
   return (
-    <Fragment>
+    <div className="container">
       <Search />
       <Users />
-    </Fragment>
+    </div>
   )
 }
 
