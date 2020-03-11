@@ -5,11 +5,22 @@ import ContactItem from './ContactItem'
 const Contact = () => {
 
   const contactContext = useContext(ContactContext);
-  const { contacts } = contactContext;
+  const { contacts, filtered } = contactContext;
+
+  if(contacts.length === 0)
+  {
+    return <p className="flow-text">No Contacts Listed</p>
+  }
+
 
   return (
+
       <ul className="collection">
-      { contacts.map(contact => <ContactItem contact={contact} key={contact.id}/>) }
+
+        { filtered ? filtered.map(contact => (
+        <ContactItem contact={contact} key={contact.id}/>
+      ))  : contacts.map(contact => <ContactItem contact={contact} key={contact.id}/>).sort().reverse()  }
+
       </ul>
   )
 }
