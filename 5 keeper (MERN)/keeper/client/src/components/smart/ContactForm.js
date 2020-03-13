@@ -6,7 +6,7 @@ const ContactForm = () => {
 
   const contactContext = useContext(ContactContext);
 
-  const { addContact, current, clearCurrent, updateContact } = contactContext
+  const { addContact, current, clearCurrent, updateContact, loading } = contactContext
 
   useEffect(() => {
     if(current)
@@ -49,20 +49,17 @@ const ContactForm = () => {
       M.toast({ html: 'Contact Added' });
     }
 
-    else 
+    else
     {
       updateContact(contact);
-      M.toast({ html: 'Contact Updated Successfully' });
+
+      if(!loading)
+      {
+        M.toast({ html: 'Contact Updated Successfully' });
+      }
     }
 
-
-    // back to normal after adding
-    setContact({
-      name: '',
-      email: '',
-      phone: '',
-      type: 'personal'
-    });
+    onClear();
   }
 
   const onClear = () => {
@@ -72,7 +69,8 @@ const ContactForm = () => {
   return (
 
     <form onSubmit={onSubmit}>
-      <h3>Add Contact</h3>
+
+    {current ? <h4>Edit Contact</h4> : <h4>Add Contact</h4> }
       
       <div className="input-field">
         <input type="text" name="name" onChange={onChange} value={name} className="validate" required/>
@@ -103,7 +101,9 @@ const ContactForm = () => {
       <br/><br/>
 
       <div className="input-field">
-      <input type="submit" value={current ? 'Update' : 'Add'} className="btn green"/>
+
+        { current ? <input type="submit" value="Update" className="btn green"/> : <input type="submit" value='Add' className="btn green"/>}
+
   { current && <button className="btn red secondary-content" onClick={onClear}>Clear</button> }
       </div> 
 

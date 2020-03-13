@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import ContactContext from '../../context/contact/contactContext'
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const ContactItem = ({ contact, contact: { name, email, id, phone, type } }) => {
+const ContactItem = ({ contact, contact: { name, email, _id, phone, type } }) => {
 
 
   const contactContext = useContext(ContactContext);
@@ -10,7 +10,7 @@ const ContactItem = ({ contact, contact: { name, email, id, phone, type } }) => 
   const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
   const onDelete = () => {
-    deleteContact(id);
+    deleteContact(_id);
     clearCurrent();
     M.toast({ html: 'Contact Deleted' });
   }
